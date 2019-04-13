@@ -1,8 +1,23 @@
+'use strict';
+/**
+ * Express style app so I'm going to require Express
+ */
+
+const express = require('express');
 const functions = require('firebase-functions');
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+const app = express();
+
+/**
+ * SPA, so all request are going to be routed to /
+ */
+app.get('/', async(req, res) => {
+  res.write('<h1>Single House</h1>');
+  res.end();
+});
+
+const requestHouse = functions.https.onRequest(app);
+
+exports.requestHouse = requestHouse;
+
+
