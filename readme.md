@@ -5,3 +5,13 @@ Full disclosure, I've been looking into this technique for some time. I'll inten
 ## The Idea
 
 To use Cloud Functions and Workbox to create an application that uses HTTP Streams and Service Worker to serve a fast and resilliant app. One that fully exploits modern features for modern browsers. My focuspoints will also include new client side features, like intersection observer and scroll-snap to keep it light and fast.
+
+## Config
+
+In order to keep secrets I've used Firebase CLI to store the credentials in my project.
+
+```
+firebase functions:config:set house.base=""
+firebase functions:config:set house.key=""
+firebase functions:config:set house.id=""
+```
