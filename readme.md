@@ -8,10 +8,17 @@ To use Cloud Functions and Workbox to create an application that uses HTTP Strea
 
 ## Config
 
-In order to keep secrets I've used Firebase CLI to store the credentials in my project.
+In order to keep secrets I'm using Firebase auth to store the credentials for my project.
 
 ```
 firebase functions:config:set house.base=""
 firebase functions:config:set house.key=""
 firebase functions:config:set house.id=""
 ```
+
+To get the variables locally run the following command in de functions folder.
+
+```
+firebase functions:config:get > .runtimeconfig.json
+```
+

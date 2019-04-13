@@ -1,0 +1,15 @@
+{
+  "short_name": "House",
+  "name": "Single House App",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "background_color": "#f7a100",
+  "theme_color": "#ffffff"
+}
