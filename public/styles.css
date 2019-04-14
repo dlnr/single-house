@@ -34,8 +34,13 @@ html,body{
 
 #gallery .g {
   display: grid;
-  grid-template-columns: repeat(37,80vw);
-  grid-template-rows: 50vh;
+  grid-template-columns: repeat(37, 92vw);
+  /* The size of the largest upload is 922 * 615 */
+  /* So I did calculated (615 / 922) * 100 to get 66 */
+  /* So the height of the container can be set width calc */
+  /* and the aspect is about right, the rest is corrected  */
+  /* width object-fit */
+  grid-template-rows: calc(100vw * .66);
   grid-gap: var(--gutter);
   scroll-snap-type: x mandatory;
   overflow-x: scroll;
@@ -72,7 +77,7 @@ article header h1 {
 article header h2 {
   margin: 0;
   font-size: 1.2rem;
-  font-weight: 300; 
+  font-weight: 300;
 }
 
 article header span {

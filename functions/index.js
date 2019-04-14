@@ -29,6 +29,10 @@ const lruOptions = {
 };
 const apiCache = new LRUCache(lruOptions);
 
+/**
+ * Try to get the data from the lru-cache or get it
+ * from the network trough axios request
+ */
 async function requestData(url) {
   const cachedResponse = apiCache.get(url);
 
@@ -134,7 +138,7 @@ function house(data) {
 }
 
 /**
- * Partials, for caching
+ * Partials
  */
 const headPartial = `
 <!DOCTYPE html>
