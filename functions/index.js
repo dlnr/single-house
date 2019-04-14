@@ -2,8 +2,8 @@
 /**
  * Express style app so I'm going to require Express.
  * Firebase functions to add the SDK.
- * https is another get method to allow us to keep the connection open
- * untill we're checked the cache.
+ * https is a request method fron node and allows us to keep the connection open
+ * untill we're done with the request or cache.
  * axios make it crossbrowser friendly and is a promises based http client.
  * lru-cache is to set a time limit on cached items.
  *
@@ -63,6 +63,73 @@ function getHouse() {
 }
 
 /**
+ * Build a responsive gallery image
+ */
+function galleryImage(image) {
+
+  if (image.Soort === 3) {
+
+    return `
+      <img src="${image.MediaItems[image.MediaItems.length-1].Url}"
+      width="${image.MediaItems[image.MediaItems.length-1].Width}"
+      height="${image.MediaItems[image.MediaItems.length-1].Height}"
+      alt="${image.Omschrijving}">
+    `;
+
+  }
+
+}
+
+/**
+ * Build the House
+ */
+
+function house(data) {
+  if(!data) {
+    return `<p>I'm very sorry, demos usually work fine...</p>`;
+  }
+
+  // I know there is a formatted price but I really like this constructor.
+  const price = new Intl.NumberFormat('nl-nl', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(data.Koopprijs);
+
+  // Map all house media to a function that creates images
+  const galleryImages = data.Media.map(item => galleryImage(item)).join('');
+
+  const houseHeader = `
+    <article>
+      <header>
+        <div class="c">
+        <h1>${data.Adres} - ${data.Plaats}</h1>
+        <span>${price}</span>
+        </div>
+      </header>
+  `;
+  const houseGallery = `
+      <div id="gallery">
+        ${galleryImages}
+      </div>
+  `;
+  const houseContent = `
+      <div id="content">
+
+      </div>
+  `;
+  const houseFooter = `
+      <footer>
+
+      </footer>
+    </article>
+  `;
+
+  return houseHeader + houseGallery + houseContent + houseFooter;
+}
+
+/**
  * Partials, for caching
  */
 const headPartial = `
@@ -89,11 +156,10 @@ const footPartial = `
  */
 app.get('/', async(req, res) => {
   res.write(headPartial);
-  res.write(`<h1>Single House</h1>`);
 
   try {
     const houseData = await requestData(getHouse());
-    res.write(`<strong>${houseData.Plaats}</strong>`);
+    res.write(house(houseData));
   } catch (error) {
     res.write(`
     <p>I'm very sorry, demos usually work fine...</p>
