@@ -21,3 +21,5 @@ node_modules/
 # firebase project
 .firebaserc
 .runtimeconfig.json
+
+.vscode

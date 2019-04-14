@@ -5,6 +5,7 @@
   --gutter: 10px;
   --tablet: 799px;
   --desktop: 1023px;
+  --gitems: 1;
 }
 
 * {
@@ -34,12 +35,12 @@ html,body{
 
 #gallery .g {
   display: grid;
-  grid-template-columns: repeat(37, 92vw);
+  grid-template-columns: repeat(var(--gitems), 92vw);
   /* The size of the largest upload is 922 * 615 */
   /* So I did calculated (615 / 922) * 100 to get 66 */
   /* So the height of the container can be set width calc */
   /* and the aspect is about right, the rest is corrected  */
-  /* width object-fit */
+  /* with object-fit */
   grid-template-rows: calc(100vw * .66);
   grid-gap: var(--gutter);
   scroll-snap-type: x mandatory;
@@ -53,6 +54,10 @@ html,body{
   padding: 0;
   object-fit: cover;
   scroll-snap-align: center;
+}
+
+img.ll:not(.ld) {
+  filter: blur(10px);
 }
 
 article header {
@@ -88,4 +93,12 @@ article header span {
   right: 0px;
   border-radius: 0 0 0 3px;
   font-weight: bold;
+}
+
+@media screen and (min-width: 995px) {
+
+  #gallery .g {
+    grid-template-columns: repeat(var(--gitems), 922px);
+    grid-template-rows: calc(922px * .66);
+  }
 }

@@ -71,13 +71,19 @@ function getHouse() {
  */
 function galleryImage(image) {
 
+  // Only if this is an image, no time to dive into the webcomponents for now
   if (image.Soort === 3) {
 
+    // Remove the tiny thumbnails for the srcset
+    let mediaItems = image.MediaItems.slice(2);
+    // Make a srcset string
+    let srcset = mediaItems.map(item => `${item.Url} ${item.Width}w`).join(',');
+
     return `
-      <img src="${image.MediaItems[image.MediaItems.length-1].Url}"
-      width="${image.MediaItems[image.MediaItems.length-1].Width}"
-      height="${image.MediaItems[image.MediaItems.length-1].Height}"
-      alt="${image.Omschrijving}">
+      <img class="ll"
+      src="${image.MediaItems[0].Url}"
+      data-srcset="${srcset}"
+      data-sizes="(max-width:580px) 92vw, (max-width:922px) 92vw, 922px">
     `;
 
   }
@@ -120,6 +126,8 @@ function house(data) {
         <div class="g">
           ${galleryImages}
         </div>
+        <script>document.documentElement.style.setProperty("--gitems", ${galleryImages.length});
+        </script>
       </div>
   `;
   const houseContent = `
