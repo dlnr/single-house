@@ -104,14 +104,18 @@ function house(data) {
     <article>
       <header>
         <div class="c">
-        <h1>${data.Adres} - ${data.Plaats}</h1>
-        <span>${price}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+          <h1>${data.Adres}</h1>
+          <h2>${data.Plaats}</h2>
+          <span>${price}</span>
         </div>
       </header>
   `;
   const houseGallery = `
       <div id="gallery">
-        ${galleryImages}
+        <div class="g">
+          ${galleryImages}
+        </div>
       </div>
   `;
   const houseContent = `
@@ -141,12 +145,13 @@ const headPartial = `
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="manifest" href="/manifest.json">
   <title>Single House</title>
+  <link rel="stylesheet" href="/styles.css">
   <meta name="robots" content="noindex, nofollow">
 </head>
 <body>
 `;
 const footPartial = `
-<script src="/app.js">
+<script src="/app.js"></script>
 </body>
 </html>
 `;

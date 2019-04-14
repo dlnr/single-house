@@ -8,6 +8,7 @@ pids
 *.pid
 *.seed
 *.pid.lock
+*.cache
 
 build
 
