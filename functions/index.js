@@ -193,6 +193,7 @@ const headPartial = `
   <link rel="manifest" href="/manifest.json">
   <title>Single House</title>
   <link rel="stylesheet" href="/styles.css">
+  <meta name="theme-color" content="#f7a100">
   <meta name="robots" content="noindex, nofollow">
 </head>
 <body>
