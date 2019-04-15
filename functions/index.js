@@ -80,10 +80,10 @@ function galleryImage(image) {
     let srcset = mediaItems.map(item => `${item.Url} ${item.Width}w`).join(',');
 
     return `
-      <img class="ll"
-      src="${image.MediaItems[0].Url}"
-      data-srcset="${srcset}"
-      data-sizes="(max-width:580px) 92vw, (max-width:922px) 92vw, 922px">
+      <img
+      src="${mediaItems[0].Url}"
+      srcset="${srcset}"
+      data-sizes="(max-width:580px) 533px, 922px">
     `;
 
   }
@@ -110,6 +110,12 @@ function house(data) {
   // Map all house media to a function that creates images
   const galleryImages = data.Media.map(item => galleryImage(item)).join('');
 
+  let houseDescription = data.VolledigeOmschrijving.replace(/\n\n/g, '</p><p>');
+  houseDescription = houseDescription.replace(/\n/g, '</p><p>');
+  houseDescription = houseDescription.replace('Indeling:', '<strong>Indeling: </strong>');
+  houseDescription = houseDescription.replace('Bijzonderheden:', '<strong>Bijzonderheden: </strong>');
+  houseDescription = `<p>${houseDescription}</p>`;
+
   const houseHeader = `
     <article>
       <header>
@@ -126,13 +132,14 @@ function house(data) {
         <div class="g">
           ${galleryImages}
         </div>
-        <script>document.documentElement.style.setProperty("--gitems", ${galleryImages.length});
-        </script>
       </div>
   `;
   const houseContent = `
       <div id="content">
-
+        <div class="c">
+          <h3>Omschrijving</h3>
+          ${houseDescription}
+        </div>
       </div>
   `;
   const houseFooter = `
@@ -140,6 +147,10 @@ function house(data) {
 
       </footer>
     </article>
+
+    <script>
+    document.title = "${data.Adres} - ${data.Plaats}";
+    </script>
   `;
 
   return houseHeader + houseGallery + houseContent + houseFooter;

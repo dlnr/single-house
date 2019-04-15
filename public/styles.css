@@ -5,7 +5,7 @@
   --gutter: 10px;
   --tablet: 799px;
   --desktop: 1023px;
-  --gitems: 1;
+  --gitems: 1000;
 }
 
 * {
@@ -56,8 +56,9 @@ html,body{
   scroll-snap-align: center;
 }
 
+/* lazyload cancelled in favor of service worker */
 img.ll:not(.ld) {
-  filter: blur(10px);
+  /* filter: blur(10px); */
 }
 
 article header {
@@ -95,8 +96,25 @@ article header span {
   font-weight: bold;
 }
 
-@media screen and (min-width: 995px) {
+#content pre {
+  font-family: sans-serif;
+  font-size: .8rem;
+  display: block;
+  white-space: pre-wrap;
+  padding: 1vw;
+}
 
+@media screen and (min-width: 922px) {
+  article header .c {
+    position: relative;
+    padding-top: 8px;
+  }
+  article header span {
+    border-radius: 3px;
+  }
+}
+
+@media screen and (min-width: 995px) {
   #gallery .g {
     grid-template-columns: repeat(var(--gitems), 922px);
     grid-template-rows: calc(922px * .66);

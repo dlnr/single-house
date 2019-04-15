@@ -13,6 +13,20 @@ workbox.precaching.precacheAndRoute([
 ]);
 workbox.precaching.cleanupOutdatedCaches();
 
+workbox.routing.registerRoute(
+  new RegExp('^http://cloud.funda.nl/'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'image-cache',
+    plugins: [
+      new workbox.cacheableResponse.Plugin({
+        statuses: [0, 200],
+      }),
+      new workbox.expiration.Plugin({
+        maxEntries: 12
+      })
+    ]
+  })
+);
 
 workbox.core.skipWaiting();
 workbox.core.clientsClaim();
