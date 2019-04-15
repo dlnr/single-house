@@ -62,7 +62,7 @@ img.ll:not(.ld) {
 }
 
 article header {
-  padding: var(--gutter);
+  padding: var(--gutter) 4vw;
   color: var(--color-text);
   position: relative;
 }
@@ -102,6 +102,10 @@ article header span {
   display: block;
   white-space: pre-wrap;
   padding: 1vw;
+}
+
+#content {
+  padding: 0 4vw;
 }
 
 @media screen and (min-width: 922px) {

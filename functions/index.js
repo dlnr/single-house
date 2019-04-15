@@ -80,7 +80,7 @@ function galleryImage(image) {
     let srcset = mediaItems.map(item => `${item.Url} ${item.Width}w`).join(',');
 
     return `
-      <img
+      <img crossorigin
       src="${mediaItems[0].Url}"
       srcset="${srcset}"
       data-sizes="(max-width:580px) 533px, 922px">

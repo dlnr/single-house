@@ -1,3 +1,4 @@
+
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.2.0/workbox-sw.js');
 
 workbox.setConfig({
@@ -26,6 +27,18 @@ workbox.routing.registerRoute(
       })
     ]
   })
+);
+
+workbox.routing.registerRoute(
+  '/',
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'page-cache',
+    plugins: [
+      new workbox.cacheableResponse.Plugin({
+        statuses: [0, 200]
+      })
+    ]
+  }),
 );
 
 workbox.core.skipWaiting();
