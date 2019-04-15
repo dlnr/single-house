@@ -1,126 +1,141 @@
 :root {
-  --color-background: white;
-  --color-primary: #f7a100;
-  --color-text: darkslategrey;
-  --gutter: 10px;
-  --tablet: 799px;
-  --desktop: 1023px;
-  --gitems: 1000;
-}
+    --color-background: white; --color-primary: #f7a100; --color-text: darkslategrey; --gutter: 10px; --tablet: 799px; --desktop: 1023px; --gitems: 1000; }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-html,body{
-  min-height:100%;
-  margin:0;
-  padding:0;
-  font-family: sans-serif;
+html,body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 .c {
-  max-width: 922px;
-  margin: 0 auto;
+    max-width: 922px;
+    margin: 0 auto;
 }
 
 #gallery {
-  width: 100vw;
-  margin: 0;
+    width: 100vw;
+    margin: 0;
 }
 
 #gallery .h {
-  display: block;
+    display: block;
 }
 
 #gallery .g {
-  display: grid;
-  grid-template-columns: repeat(var(--gitems), 92vw);
-  /* The size of the largest upload is 922 * 615 */
-  /* So I did calculated (615 / 922) * 100 to get 66 */
-  /* So the height of the container can be set width calc */
-  /* and the aspect is about right, the rest is corrected  */
-  /* with object-fit */
-  grid-template-rows: calc(100vw * .66);
-  grid-gap: var(--gutter);
-  scroll-snap-type: x mandatory;
-  overflow-x: scroll;
+    display: grid;
+    grid-template-columns: repeat(var(--gitems), 92vw);
+    /* The size of the largest upload is 922 * 615 */
+    /* So I did calculated (615 / 922) * 100 to get 66 */
+    /* So the height of the container can be set width calc */
+    /* and the aspect is about right, the rest is corrected  */
+    /* with object-fit */
+    grid-template-rows: calc(100vw * .66);
+    grid-gap: var(--gutter);
+    scroll-snap-type: x mandatory;
+    overflow-x: scroll;
 }
 
 #gallery img {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  object-fit: cover;
-  scroll-snap-align: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
+    scroll-snap-align: center;
 }
 
+#gallery .no-touch img {
+    cursor: pointer;
+}
 /* lazyload cancelled in favor of service worker */
 img.ll:not(.ld) {
-  /* filter: blur(10px); */
+    /* filter: blur(10px); */
 }
 
 article header {
-  padding: var(--gutter) 4vw;
-  color: var(--color-text);
-  position: relative;
+    padding: var(--gutter) 4vw;
+    color: var(--color-text);
+    position: relative;
 }
 
 article header svg {
-  fill: var(--color-text);
+    fill: var(--color-text);
 }
 
 article header svg:hover {
-  fill: var(--color-primary);
+    fill: var(--color-primary);
 }
 
 article header h1 {
-  margin: 0;
-  font-size: 1.5rem;
+    margin: 0;
+    font-size: 1.5rem;
 }
 
 article header h2 {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 300;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 300;
 }
 
 article header span {
-  background: var(--color-primary);
-  padding: 8px 15px;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  border-radius: 0 0 0 3px;
-  font-weight: bold;
+    background: var(--color-primary);
+    padding: 8px 15px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-radius: 0 0 0 3px;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
-#content pre {
-  font-family: sans-serif;
-  font-size: .8rem;
-  display: block;
-  white-space: pre-wrap;
-  padding: 1vw;
+.content pre {
+    font-family: sans-serif;
+    font-size: .8rem;
+    display: block;
+    white-space: pre-wrap;
+    padding: 1vw;
 }
 
-#content {
-  padding: 0 4vw;
+.content {
+    padding: 0 4vw 1em 4vw;
 }
+
+p.list {
+    margin: 0 0 .3em 0;
+}
+
+.f {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px dotted var(--color-text);
+    padding-bottom: .1rem;
+    margin-bottom: .1rem;
+}
+
+.f span {
+    flex: 1 1 50%;
+}
+
 
 @media screen and (min-width: 922px) {
-  article header .c {
-    position: relative;
-    padding-top: 8px;
-  }
-  article header span {
-    border-radius: 3px;
-  }
+    article header .c {
+        position: relative;
+        padding-top: 8px;
+    }
+
+    article header span {
+        border-radius: 3px;
+    }
 }
 
 @media screen and (min-width: 995px) {
-  #gallery .g {
-    grid-template-columns: repeat(var(--gitems), 922px);
-    grid-template-rows: calc(922px * .66);
-  }
+    #gallery .g {
+        grid-template-columns: repeat(var(--gitems), 922px);
+        grid-template-rows: calc(922px * .66);
+    }
 }

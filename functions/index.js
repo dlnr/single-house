@@ -70,25 +70,39 @@ function getHouse() {
  * Build a responsive gallery image
  */
 function galleryImage(image) {
-
   // Only if this is an image, no time to dive into the webcomponents for now
   if (image.Soort === 3) {
-
-    // Remove the tiny thumbnails for the srcset
-    let mediaItems = image.MediaItems.slice(2);
+    // Remove the tiny thumbnail for the srcset
+    let mediaItems = image.MediaItems.slice(1);
+    // To be a good PWA all request must use HTTPS
+    let srcUrl = mediaItems[0].Url.replace('http:', 'https:');
     // Make a srcset string
-    let srcset = mediaItems.map(item => `${item.Url} ${item.Width}w`).join(',');
+    let srcset = mediaItems.map(item => `${item.Url.replace('http:', 'https:')} ${item.Width}w`).join(',');
 
     return `
       <img crossorigin
-      src="${mediaItems[0].Url}"
-      srcset="${srcset}"
-      data-sizes="(max-width:580px) 533px, 922px">
+      src="${srcUrl}"
+      sizes="(min-width: 922px) 100vw, 922px"
+      srcset="${srcset}">
     `;
-
   }
-
 }
+
+/**
+ * House feature
+ */
+function houseFeature(feature) {
+  const featureTitle = `<h4>${feature.Titel}</h4>`;
+  const features = feature.Kenmerken.map(feature => `
+    <div class="f ${feature.NaamCss || 'default'}">
+      <span>${feature.Naam}</span>
+      <span>${feature.Waarde}</span>
+    </div>
+  `).join('');
+
+  return featureTitle + features;
+}
+
 
 /**
  * Build the House
@@ -110,10 +124,13 @@ function house(data) {
   // Map all house media to a function that creates images
   const galleryImages = data.Media.map(item => galleryImage(item)).join('');
 
+  const features = data.Kenmerken.map(item => houseFeature(item)).join('');
+
   let houseDescription = data.VolledigeOmschrijving.replace(/\n\n/g, '</p><p>');
   houseDescription = houseDescription.replace(/\n/g, '</p><p>');
   houseDescription = houseDescription.replace('Indeling:', '<strong>Indeling: </strong>');
   houseDescription = houseDescription.replace('Bijzonderheden:', '<strong>Bijzonderheden: </strong>');
+  houseDescription = houseDescription.replace(/<p>•/g, '<p class="list">•');
   houseDescription = `<p>${houseDescription}</p>`;
 
   const houseHeader = `
@@ -134,8 +151,15 @@ function house(data) {
         </div>
       </div>
   `;
+  const houseFeatures = `
+      <div class="content">
+        <div class="c">
+          ${features}
+        </div>
+      </div>
+  `;
   const houseContent = `
-      <div id="content">
+      <div class="content">
         <div class="c">
           <h3>Omschrijving</h3>
           ${houseDescription}
@@ -153,7 +177,7 @@ function house(data) {
     </script>
   `;
 
-  return houseHeader + houseGallery + houseContent + houseFooter;
+  return houseHeader + houseGallery + houseFeatures + houseContent + houseFooter;
 }
 
 /**
