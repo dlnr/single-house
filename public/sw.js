@@ -2,7 +2,7 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.2.0/workbox-sw.js');
 
 workbox.setConfig({
-  debug: true,
+  debug: false,
 });
 
 workbox.precaching.precacheAndRoute([
@@ -15,7 +15,7 @@ workbox.precaching.precacheAndRoute([
 workbox.precaching.cleanupOutdatedCaches();
 
 workbox.routing.registerRoute(
-  new RegExp('^http://cloud.funda.nl/'),
+  new RegExp('^https://cloud.funda.nl/'),
   new workbox.strategies.CacheFirst({
     cacheName: 'image-cache',
     plugins: [
