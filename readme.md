@@ -1,8 +1,6 @@
 # Single House Web App
 
-[single-house.firebaseapp.com](https://single-house.firebaseapp.com/)
-
-Full disclosure, I've been looking into this technique for some weeks, to use in freelance projects. I'll intentionally avoid Babel and modules so that the code is run 'as is' and you'll get a clear picture of the idea. You can compile sass, use various plugins and task runners, and I would use those for a production app, but this a proof of concept. And personally I would like to see how far you can go without all those node modules.
+Full disclosure, I've been looking into this technique for some time, to use in freelance projects. I'll intentionally avoid Babel and modules so that the code is run 'as is' and you'll get a clear picture of the idea. You can compile sass, use various plugins and task runners, and I would use those for a production app, but this a proof of concept. And personally I would like to see how far you can go without all those node modules.
 
 ## The Idea
 
